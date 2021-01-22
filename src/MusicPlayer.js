@@ -24,7 +24,9 @@ const MusicPlayer = () => {
             player.current.play();
         }
         else{
-            pauseButton();
+            let continua = actualIndex;
+             link(songs[continua].url, continua)
+            player.current.play(); 
         }
     };
 
@@ -38,7 +40,7 @@ const MusicPlayer = () => {
 
     }
 
-    function next() {
+    function nextButton() {
         let next1;
         if (actualIndex == null) {
             next1 = 0;
@@ -56,7 +58,7 @@ const MusicPlayer = () => {
         }
     }
 
-    function preview() {
+    function previewButton() {
         let prev;
         if (actualIndex == null) {
             prev = 0;
@@ -74,12 +76,12 @@ const MusicPlayer = () => {
     }
 
     return (
-        <div className="card">
+        <div className=" container">
             <div className="card-body">
                 <ul className="list-group" style={{ cursor: 'pointer' }}>
                     {
                         songs.map((val, i) => {
-                            return <li className="list-group-item list-group-item-action" key={i} onClick={(e) => link(val.url, i)}>
+                            return <li className="list-group-item list-group-item-action bg-light" key={i} onClick={(e) => link(val.url, i)}>
                                 {val.name}
                             </li>
                         })
@@ -87,10 +89,10 @@ const MusicPlayer = () => {
                 </ul>
                 <audio id='audio' ref={player} autoPlay type="audio/mp3" />
 
-                <div className="card-footer d-flex justify-content-center">
-                    <button className="btn btn-secondary fa  fa-step-backward" type="button" onClick={() => preview()} ></button>
+                <div className="card-footer d-flex justify-content-center bg-secondary">
+                    <button className="btn btn-secondary fa  fa-step-backward" type="button" onClick={() => previewButton()} ></button>
                     <button className={"btn btn-secondary fa " + ((reproducing) ? 'fa-pause' : 'fa-play')} type="button" onClick={() => buttonPlayPause()}></button>
-                    <button className="btn btn-secondary fa fa-step-forward" type="button" onClick={() => next()}></button>
+                    <button className="btn btn-secondary fa fa-step-forward" type="button" onClick={() => nextButton()}></button>
                 </div>
             </div>
         </div>
